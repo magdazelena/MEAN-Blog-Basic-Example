@@ -10,7 +10,11 @@
       [routerLinkActive]="['active']"
       [routerLinkActiveOptions]="{ exact: true }"
     >
-      <a routerLink="/dashboard">Dashboard</a>
+      <a *ngIf="!authService.loggedIn()" routerLink="/dashboard">Dashboard</a>
+      <a *ngIf="authService.loggedIn()" routerLink="/login">Login</a>
+      <a *ngIf="!authService.loggedIn()" href="#" (click)="onLogoutClick()"
+        >Logout
+      </a>
     </li>
   </ul>
 </nav>
