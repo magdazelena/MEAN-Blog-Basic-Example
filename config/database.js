@@ -3,6 +3,6 @@ const crypto = require("crypto")
   .toString("hex");
 
 module.exports = {
-  uri: "mongodb://localhost:27017/blog",
+  uri: "mongodb://localhost/blog",
   secret: crypto
 };
