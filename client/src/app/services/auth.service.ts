@@ -14,7 +14,8 @@ import {
 import { jsonpCallbackContext } from "@angular/common/http/src/module";
 import { map, filter, catchError, mergeMap } from "rxjs/operators";
 import { getTypeNameForDebugging } from "@angular/core/src/change_detection/differs/iterable_differs";
-
+import { JwtHelperService } from "@auth0/angular-jwt";
+const helper = new JwtHelperService();
 @Injectable({
   providedIn: "root"
 })
@@ -64,7 +65,14 @@ export class AuthService {
       );
   }
   loggedIn() {
-    if (this.authToken != null) return false;
-    else return true;
+    if (this.authToken) {
+      if (helper.isTokenExpired(this.authToken)) {
+        return false;
+      } else {
+        return true;
+      }
+    } else {
+      return false;
+    }
   }
 }

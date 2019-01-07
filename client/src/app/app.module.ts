@@ -11,9 +11,14 @@ import { DashboardComponent } from "./components/dashboard/dashboard.component";
 import { RegisterComponent } from "./components/register/register.component";
 
 import { AuthService } from "./services/auth.service";
-import { LoginComponent } from './components/login/login.component';
-import { ProfileComponent } from './components/profile/profile.component';
+import { LoginComponent } from "./components/login/login.component";
+import { ProfileComponent } from "./components/profile/profile.component";
+import { AuthGuard } from "./guards/auth.guard";
+import { NotAuthGuard } from "./guards/notAuth.guard";
 
+export function tokenGetter() {
+  return localStorage.getItem("access_token");
+}
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +36,7 @@ import { ProfileComponent } from './components/profile/profile.component';
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [AuthService],
+  providers: [AuthService, AuthGuard, NotAuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
