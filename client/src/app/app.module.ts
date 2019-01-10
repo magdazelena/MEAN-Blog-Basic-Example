@@ -15,6 +15,7 @@ import { LoginComponent } from "./components/login/login.component";
 import { ProfileComponent } from "./components/profile/profile.component";
 import { AuthGuard } from "./guards/auth.guard";
 import { NotAuthGuard } from "./guards/notAuth.guard";
+import { BlogComponent } from './components/blog/blog.component';
 
 export function tokenGetter() {
   return localStorage.getItem("access_token");
@@ -28,7 +29,8 @@ export function tokenGetter() {
     DashboardComponent,
     RegisterComponent,
     LoginComponent,
-    ProfileComponent
+    ProfileComponent,
+    BlogComponent
   ],
   imports: [
     BrowserModule,
