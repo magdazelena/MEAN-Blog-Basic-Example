@@ -20,7 +20,7 @@ const helper = new JwtHelperService();
   providedIn: "root"
 })
 export class AuthService {
-  domain = "http://localhost:8080";
+  domain = "http://localhost:8080/";
   authToken;
   user;
   options;
@@ -38,10 +38,10 @@ export class AuthService {
     this.authToken = localStorage.getItem("token");
   }
   registerUser(user) {
-    return this.http.post<any>(this.domain + "/authentication/register", user);
+    return this.http.post<any>(this.domain + "authentication/register", user);
   }
   login(user) {
-    return this.http.post<any>(this.domain + "/authentication/login", user);
+    return this.http.post<any>(this.domain + "authentication/login", user);
   }
   logout() {
     this.authToken = null;
@@ -57,7 +57,7 @@ export class AuthService {
   getProfile() {
     this.createAuthenticationHeaders();
     return this.http
-      .get(this.domain + "/authentication/profile", this.options)
+      .get(this.domain + "authentication/profile", this.options)
       .pipe(
         map((res: any) => {
           return res;

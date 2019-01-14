@@ -7,7 +7,7 @@ import { AuthService } from "../services/auth.service";
 export class NotAuthGuard implements CanActivate {
   constructor(private authService: AuthService, private router: Router) {}
   canActivate(): boolean {
-    if (!this.authService.loggedIn()) {
+    if (this.authService.loggedIn()) {
       this.router.navigate(["/"]);
       return false;
     } else {
