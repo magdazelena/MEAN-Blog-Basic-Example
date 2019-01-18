@@ -9,7 +9,7 @@ import { HomeComponent } from "./components/home/home.component";
 import { HttpClientModule } from "@angular/common/http";
 import { DashboardComponent } from "./components/dashboard/dashboard.component";
 import { RegisterComponent } from "./components/register/register.component";
-
+import { PublicService } from "./services/public.service";
 import { AuthService } from "./services/auth.service";
 import { BlogService } from "./services/blog.service";
 import { LoginComponent } from "./components/login/login.component";
@@ -39,7 +39,7 @@ export function tokenGetter() {
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [AuthService, AuthGuard, NotAuthGuard, BlogService],
+  providers: [PublicService, AuthService, AuthGuard, NotAuthGuard, BlogService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

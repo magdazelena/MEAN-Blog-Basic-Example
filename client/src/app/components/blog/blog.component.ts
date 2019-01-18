@@ -20,7 +20,7 @@ export class BlogComponent implements OnInit {
   form;
   processing = false;
   username;
-
+  blogPosts;
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
@@ -37,8 +37,6 @@ export class BlogComponent implements OnInit {
     });
   }
   onBlogSubmit() {
-    console.log("form submitted");
-
     this.processing = true;
     const blog = {
       title: this.form.get("title").value,
@@ -54,6 +52,11 @@ export class BlogComponent implements OnInit {
       } else {
         this.messageClass = "alert alert-success";
         this.message = data.message;
+        setTimeout(() => {
+          this.newPost = false; // Hide form
+          this.processing = false; // Enable submit button
+          this.form.reset(); // Reset all form fields
+        }, 2000);
       }
     });
   }
@@ -62,7 +65,7 @@ export class BlogComponent implements OnInit {
   }
   reloadBlogs() {
     this.newPost = true;
-    //get blogs
+    this.getAllBlogs();
     setTimeout(() => {
       this.loadingBlogs = false;
     }, 4000);
@@ -70,7 +73,13 @@ export class BlogComponent implements OnInit {
   newBlogForm() {
     this.newPost = true;
   }
+  getAllBlogs() {
+    this.blogService.getAllBlogs().subscribe(data => {
+      this.blogPosts = data.blogs;
+    });
+  }
   ngOnInit() {
+    this.getAllBlogs();
     this.authService.getProfile().subscribe(profile => {
       this.username = profile.user.name;
     });

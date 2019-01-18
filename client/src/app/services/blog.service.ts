@@ -43,4 +43,14 @@ export class BlogService {
         })
       );
   }
+  getAllBlogs() {
+    this.createAuthenticationHeaders();
+    return this.http
+      .get<any>(this.domain + "blogs/allBlogs", this.options)
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
 }

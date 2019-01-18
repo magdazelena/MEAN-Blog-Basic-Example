@@ -64,10 +64,13 @@
   </form>
 </div>
 <div *ngIf="!newPost">
-  <div class="panel panel-primary">
+  <div class="panel panel-primary" *ngFor="let blog of blogPosts">
     <div class="panel-header">
-      <div class="panel-title"><h3>Panel title</h3></div>
+      <div class="panel-title">
+        <h3>{{ blog.title }}</h3>
+      </div>
     </div>
-    <div class="panel-body">teskt</div>
+    <div class="panel-body">{{ blog.blog }}</div>
+    <div>{{ blog.date | date: "MMM dd, yyyy" }}</div>
   </div>
 </div>

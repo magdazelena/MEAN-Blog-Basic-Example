@@ -5,8 +5,10 @@ const mongoose = require("mongoose");
 const config = require("./config/database");
 const path = require("path");
 const bodyParser = require("body-parser");
+const blogsPublic = require("./routes/blogsPublic")(router);
 const authentication = require("./routes/authentication")(router);
 const blogs = require("./routes/blogs")(router);
+
 const cors = require("cors");
 mongoose.Promise = global.Promise;
 mongoose.connect(
@@ -25,6 +27,7 @@ app.use(
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static(__dirname + "/client/dist/"));
+app.use("/blogsPublic", blogsPublic);
 app.use("/authentication", authentication);
 app.use("/blogs", blogs);
 app.get("*", function(req, res) {

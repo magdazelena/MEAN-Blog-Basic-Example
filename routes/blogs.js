@@ -45,20 +45,33 @@ module.exports = router => {
       }
     }
   });
-  router.use((req, res, next) => {
-    const token = req.headers["authorization"];
-    if (!token) {
-      res.json({ success: false, message: "No token provided" });
-    } else {
-      jwt.verify(token, config.secret, (err, decoded) => {
-        if (err) {
-          res.json({ success: false, message: "Token invalid" });
+  router.get("/allBlogs", (req, res) => {
+    Blog.find({}, (err, blogs) => {
+      if (err) {
+        res.json({ sucess: false, message: err });
+      } else {
+        if (!blogs) {
+          res.json({ sucess: false, message: "No blogs found" });
         } else {
-          req.decoded = decoded;
-          next();
+          res.json({ success: true, blogs: blogs });
         }
-      });
-    }
+      }
+    }).sort({ _id: -1 });
   });
+  // router.use((req, res, next) => {
+  //   const token = req.headers["authorization"];
+  //   if (!token) {
+  //     res.json({ success: false, message: "No token provided" });
+  //   } else {
+  //     jwt.verify(token, config.secret, (err, decoded) => {
+  //       if (err) {
+  //         res.json({ success: false, message: "Token invalid" });
+  //       } else {
+  //         req.decoded = decoded;
+  //         next();
+  //       }
+  //     });
+  //   }
+  // });
   return router;
 };
