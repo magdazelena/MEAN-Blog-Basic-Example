@@ -43,6 +43,16 @@ export class BlogService {
         })
       );
   }
+  getAllCats() {
+    this.createAuthenticationHeaders();
+    return this.http
+      .get<any>(this.domain + "blogs/categories", this.options)
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
   getAllBlogs() {
     this.createAuthenticationHeaders();
     return this.http

@@ -21,6 +21,7 @@ export class BlogComponent implements OnInit {
   processing = false;
   username;
   blogPosts;
+  categories;
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
@@ -33,17 +34,19 @@ export class BlogComponent implements OnInit {
     this.form = this.formBuilder.group({
       title: "",
       blog: "",
-      createdBy: ""
+      category: new FormControl("")
     });
+    this.getAllCats();
   }
   onBlogSubmit() {
     this.processing = true;
+    this.form.get("category").valueChanges.subscribe(data => console.log(data));
     const blog = {
       title: this.form.get("title").value,
       blog: this.form.get("blog").value,
-      createdBy: this.username
+      category: this.form.get("category").value
     };
-
+    console.log(blog.category);
     this.blogService.newBlog(blog).subscribe(data => {
       if (!data.success) {
         this.messageClass = "alert alert-danger";
@@ -76,6 +79,11 @@ export class BlogComponent implements OnInit {
   getAllBlogs() {
     this.blogService.getAllBlogs().subscribe(data => {
       this.blogPosts = data.blogs;
+    });
+  }
+  getAllCats() {
+    this.blogService.getAllCats().subscribe(data => {
+      this.categories = data.cats;
     });
   }
   ngOnInit() {

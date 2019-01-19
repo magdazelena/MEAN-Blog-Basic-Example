@@ -1,5 +1,6 @@
 const User = require("../models/user"); // Import User Model Schema
 const Blog = require("../models/blog");
+const Category = require("../models/category");
 const jwt = require("jsonwebtoken");
 const config = require("../config/database");
 
@@ -14,7 +15,8 @@ module.exports = router => {
       } else {
         let blog = new Blog({
           title: req.body.title,
-          blog: req.body.blog
+          blog: req.body.blog,
+          category: req.body.category
         });
         // Save user to database
         blog.save(err => {
@@ -32,7 +34,14 @@ module.exports = router => {
                     message: err.errors.blog.message
                   }); // Return error message
                 } else {
-                  res.json({ success: false, message: err }); // Return general error message
+                  if (err.errors.category) {
+                    res.json({
+                      success: false,
+                      message: err.errors.category.message
+                    });
+                  } else {
+                    res.json({ success: false, message: err });
+                  } // Return general error message
                 }
               }
             } else {
@@ -58,20 +67,19 @@ module.exports = router => {
       }
     }).sort({ _id: -1 });
   });
-  // router.use((req, res, next) => {
-  //   const token = req.headers["authorization"];
-  //   if (!token) {
-  //     res.json({ success: false, message: "No token provided" });
-  //   } else {
-  //     jwt.verify(token, config.secret, (err, decoded) => {
-  //       if (err) {
-  //         res.json({ success: false, message: "Token invalid" });
-  //       } else {
-  //         req.decoded = decoded;
-  //         next();
-  //       }
-  //     });
-  //   }
-  // });
+  router.get("/categories", (req, res) => {
+    Category.find({}, (err, cats) => {
+      if (err) {
+        console.log(err);
+        res.json({ sucess: false, message: err });
+      } else {
+        if (!cats) {
+          res.json({ sucess: false, message: "No blogs found" });
+        } else {
+          res.json({ success: true, cats: cats });
+        }
+      }
+    });
+  });
   return router;
 };

@@ -18,6 +18,10 @@ const blogSchema = new Schema({
   date: {
     type: Date,
     default: Date.now()
+  },
+  category: {
+    type: String,
+    required: true
   }
 });
 

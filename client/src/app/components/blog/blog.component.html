@@ -43,6 +43,14 @@
         formControlName="blog"
       />
     </div>
+    <div class="form-group">
+      <select name="category" formControlName="category">
+        <option value="">Select category</option>
+        <option *ngFor="let category of categories" [ngValue]="category._id">{{
+          category.title
+        }}</option>
+      </select>
+    </div>
 
     <button
       [disabled]="processing"
