@@ -40,13 +40,11 @@ export class BlogComponent implements OnInit {
   }
   onBlogSubmit() {
     this.processing = true;
-    this.form.get("category").valueChanges.subscribe(data => console.log(data));
     const blog = {
       title: this.form.get("title").value,
       blog: this.form.get("blog").value,
       category: this.form.get("category").value
     };
-    console.log(blog.category);
     this.blogService.newBlog(blog).subscribe(data => {
       if (!data.success) {
         this.messageClass = "alert alert-danger";

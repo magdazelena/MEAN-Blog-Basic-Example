@@ -18,6 +18,10 @@ const categorySchema = new Schema({
   desc: {
     type: String,
     required: true
+  },
+  slug: {
+    type: String,
+    required: true
   }
 });
 

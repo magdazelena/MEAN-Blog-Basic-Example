@@ -1,3 +1,26 @@
-<div class="panel panel-primary" *ngFor="let blog of blogPosts">
-  <div class="panel panel-title">{{ blog.title }}</div>
+<div class="row">
+  <div class="col-lg-6 col-md-5">
+    <ul class="nav nav-pills nav-stacked">
+      <li role="presentation" class="active">
+        <a href="#" (click)="reloadPosts('all')">All</a>
+      </li>
+      <li
+        *ngFor="let category of categories"
+        role="presentation"
+        id="{{ category._id }}"
+      >
+        <a (click)="reloadPosts(category._id)" href="#">
+          {{ category.title }}</a
+        >
+      </li>
+    </ul>
+  </div>
+  <div class="col-lg-6 col-md-7">
+    <div class="row show-hide-message">
+      <div [ngClass]="messageClass">{{ message }}</div>
+    </div>
+    <div class="panel panel-primary" *ngFor="let blog of blogPosts">
+      <div class="panel panel-title">{{ blog.title }}</div>
+    </div>
+  </div>
 </div>

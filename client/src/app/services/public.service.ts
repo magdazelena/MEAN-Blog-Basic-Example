@@ -16,9 +16,22 @@ export class PublicService {
       })
     };
   }
-
+  getBlogOfCat(cat) {
+    return this.http.get<any>(this.domain + "blogsPublic/cat/" + cat).pipe(
+      map((res: any) => {
+        return res;
+      })
+    );
+  }
   getAllBlogs() {
     return this.http.get<any>(this.domain + "blogsPublic/allBlogs").pipe(
+      map((res: any) => {
+        return res;
+      })
+    );
+  }
+  getAllCats() {
+    return this.http.get<any>(this.domain + "blogsPublic/categories").pipe(
       map((res: any) => {
         return res;
       })
