@@ -21,6 +21,10 @@
     </div>
     <div class="panel panel-primary" *ngFor="let blog of blogPosts">
       <div class="panel panel-title">{{ blog.title }}</div>
+      <div class="panel panel-body">{{ blog.excerpt }}</div>
+      <button class="btn btn-success" (click)="readMore(blog.slug)">
+        Read more
+      </button>
     </div>
   </div>
 </div>

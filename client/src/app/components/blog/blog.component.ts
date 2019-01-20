@@ -34,6 +34,7 @@ export class BlogComponent implements OnInit {
     this.form = this.formBuilder.group({
       title: "",
       blog: "",
+      excerpt: "",
       category: new FormControl("")
     });
     this.getAllCats();
@@ -43,7 +44,9 @@ export class BlogComponent implements OnInit {
     const blog = {
       title: this.form.get("title").value,
       blog: this.form.get("blog").value,
-      category: this.form.get("category").value
+      category: this.form.get("category").value,
+      excerpt: this.form.get("excerpt").value,
+      slug: this.form.get("title").value.replace("\\s", "")
     };
     this.blogService.newBlog(blog).subscribe(data => {
       if (!data.success) {

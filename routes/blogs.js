@@ -15,6 +15,8 @@ module.exports = router => {
       } else {
         let blog = new Blog({
           title: req.body.title,
+          excerpt: req.body.excerpt,
+          slug: req.body.slug,
           blog: req.body.blog,
           category: req.body.category
         });
