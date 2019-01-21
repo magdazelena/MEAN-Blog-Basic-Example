@@ -14,10 +14,33 @@
             [routerLinkActive]="['active']"
             [routerLinkActiveOptions]="{ exact: true }"
           >
-            <a *ngIf="authService.loggedIn()" routerLink="/dashboard"
-              >Dashboard</a
-            >
+            <a *ngIf="authService.loggedIn()" routerLink="/blog">Blog</a>
+          </li>
+          <li
+            [routerLinkActive]="['active']"
+            [routerLinkActiveOptions]="{ exact: true }"
+          >
+            <a *ngIf="authService.loggedIn()" routerLink="/profile">Profile</a>
+          </li>
+          <li
+            [routerLinkActive]="['active']"
+            [routerLinkActiveOptions]="{ exact: true }"
+          >
             <a *ngIf="!authService.loggedIn()" routerLink="/login">Login</a>
+          </li>
+          <li
+            [routerLinkActive]="['active']"
+            [routerLinkActiveOptions]="{ exact: true }"
+          >
+            <a *ngIf="!authService.loggedIn()" routerLink="/register"
+              >Register</a
+            >
+          </li>
+
+          <li
+            [routerLinkActive]="['active']"
+            [routerLinkActiveOptions]="{ exact: true }"
+          >
             <a *ngIf="authService.loggedIn()" href="#" (click)="onLogoutClick()"
               >Logout
             </a>

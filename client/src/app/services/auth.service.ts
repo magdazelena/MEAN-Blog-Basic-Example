@@ -1,19 +1,7 @@
 import { Injectable } from "@angular/core";
-import { HttpClient, HttpHeaders, HttpRequest } from "@angular/common/http";
-import {
-  Observable,
-  Subject,
-  asapScheduler,
-  pipe,
-  of,
-  from,
-  interval,
-  merge,
-  fromEvent
-} from "rxjs";
-import { jsonpCallbackContext } from "@angular/common/http/src/module";
-import { map, filter, catchError, mergeMap } from "rxjs/operators";
-import { getTypeNameForDebugging } from "@angular/core/src/change_detection/differs/iterable_differs";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+
+import { map } from "rxjs/operators";
 import { JwtHelperService } from "@auth0/angular-jwt";
 const helper = new JwtHelperService();
 @Injectable({
