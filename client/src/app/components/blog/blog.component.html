@@ -96,6 +96,11 @@
       <div class="panel panel-footer">
         {{ blog.date | date: "MMM dd, yyyy" }}
       </div>
+      <div class="panel panel-footer">
+        <a [routerLink]="['/edit-blog', blog._id]" class="btn btn-info"
+          >Edit blog</a
+        >
+      </div>
     </div>
   </div>
 </div>

@@ -43,6 +43,26 @@ export class BlogService {
         })
       );
   }
+  editPost(blog) {
+    this.createAuthenticationHeaders();
+    return this.http
+      .put<any>(this.domain + "blogs/editPost", blog, this.options)
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
+  getPost(id) {
+    this.createAuthenticationHeaders();
+    return this.http
+      .get<any>(this.domain + "blogs/post/" + id, this.options)
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
   getAllCats() {
     this.createAuthenticationHeaders();
     return this.http

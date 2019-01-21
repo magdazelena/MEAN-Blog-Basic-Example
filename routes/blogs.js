@@ -83,5 +83,58 @@ module.exports = router => {
       }
     });
   });
+  router.get("/post/:id", (req, res) => {
+    Blog.findOne(
+      {
+        _id: req.params.id
+      },
+      (err, blogs) => {
+        if (err) {
+          res.json({ sucess: false, message: err });
+        } else {
+          if (!blogs) {
+            res.json({ sucess: false, message: "No blogs found" });
+          } else {
+            res.json({ success: true, blogs: blogs });
+          }
+        }
+      }
+    );
+  });
+  router.put("/editPost", (req, res) => {
+    if (!req.body._id) {
+      res.json({ success: false, message: "Coś poszło nie tak" });
+    } else {
+      Blog.findOne({ _id: req.body._id }, (err, blog) => {
+        if (err || !blog) {
+          res.json({
+            success: false,
+            message: "Nie znaleziono w bazie takiego id"
+          });
+        } else {
+          User.findOne({ _id: req.decoded.userId }, (err, user) => {
+            if (err) {
+              res.json({ success: false, message: "Błąd łączenia z userem" });
+            } else {
+              blog.title = req.body.title;
+              blog.blog = req.body.blog;
+              blog.excerpt = req.body.excerpt;
+              blog.category = req.body.category;
+              blog.save(err => {
+                if (err) {
+                  res.json({
+                    success: false,
+                    message: "Nie udało się zapisać"
+                  });
+                } else {
+                  res.json({ success: true, message: "Blog updated" });
+                }
+              });
+            }
+          });
+        }
+      });
+    }
+  });
   return router;
 };

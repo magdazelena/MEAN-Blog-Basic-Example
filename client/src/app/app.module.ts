@@ -1,7 +1,7 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { ReactiveFormsModule } from "@angular/forms";
-
+import { FormsModule } from "@angular/forms";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { NavbarComponent } from "./components/navbar/navbar.component";
@@ -17,7 +17,8 @@ import { ProfileComponent } from "./components/profile/profile.component";
 import { AuthGuard } from "./guards/auth.guard";
 import { NotAuthGuard } from "./guards/notAuth.guard";
 import { BlogComponent } from "./components/blog/blog.component";
-import { PostComponent } from './components/post/post.component';
+import { PostComponent } from "./components/post/post.component";
+import { EditBlogComponent } from "./components/blog/edit-blog/edit-blog.component";
 
 export function tokenGetter() {
   return localStorage.getItem("access_token");
@@ -33,13 +34,15 @@ export function tokenGetter() {
     LoginComponent,
     ProfileComponent,
     BlogComponent,
-    PostComponent
+    PostComponent,
+    EditBlogComponent
   ],
   imports: [
     BrowserModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [PublicService, AuthService, AuthGuard, NotAuthGuard, BlogService],
   bootstrap: [AppComponent]
