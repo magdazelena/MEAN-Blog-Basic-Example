@@ -18,6 +18,7 @@ export class HomeComponent implements OnInit {
       this.blogPosts = data.blogs;
     });
   }
+
   reloadPosts(scope) {
     if (scope === "all") {
       this.message = "";

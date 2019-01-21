@@ -8,9 +8,11 @@ import { ProfileComponent } from "./components/profile/profile.component";
 import { AuthGuard } from "./guards/auth.guard";
 import { NotAuthGuard } from "./guards/notAuth.guard";
 import { BlogComponent } from "./components/blog/blog.component";
+import { PostComponent } from "./components/post/post.component";
 
 const routes: Routes = [
   { path: "", component: HomeComponent },
+  { path: "post/:slug", component: PostComponent },
   {
     path: "dashboard",
     component: DashboardComponent,

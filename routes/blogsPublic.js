@@ -17,6 +17,20 @@ module.exports = router => {
       }
     }).sort({ _id: -1 });
   });
+  router.get("/getPost/:arg", (req, res) => {
+    Blog.findOne({ slug: req.params.arg }, (err, blogs) => {
+      if (err) {
+        res.json({ sucess: false, message: err });
+      } else {
+        if (!blogs) {
+          res.json({ sucess: false, message: "No blogs found" });
+        } else {
+          res.json({ success: true, blogs: blogs });
+        }
+      }
+    });
+  });
+
   router.get("/categories", (req, res) => {
     Category.find({}, (err, cats) => {
       if (err) {

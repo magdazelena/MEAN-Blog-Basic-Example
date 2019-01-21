@@ -19,12 +19,16 @@
     <div class="row show-hide-message">
       <div [ngClass]="messageClass">{{ message }}</div>
     </div>
-    <div class="panel panel-primary" *ngFor="let blog of blogPosts">
-      <div class="panel panel-title">{{ blog.title }}</div>
-      <div class="panel panel-body">{{ blog.excerpt }}</div>
-      <button class="btn btn-success" (click)="readMore(blog.slug)">
-        Read more
-      </button>
+    <div class="panel-group" *ngFor="let blog of blogPosts">
+      <div class="panel panel-default">
+        <div class="panel panel-heading">{{ blog.title }}</div>
+        <div class="panel panel-body">{{ blog.excerpt }}</div>
+        <div class="panel panel-footer">
+          <a [routerLink]="['/post', blog.slug]" class="btn btn-success"
+            >Read more</a
+          >
+        </div>
+      </div>
     </div>
   </div>
 </div>

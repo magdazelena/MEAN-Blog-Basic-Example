@@ -82,13 +82,20 @@
   </form>
 </div>
 <div *ngIf="!newPost">
-  <div class="panel panel-primary" *ngFor="let blog of blogPosts">
-    <div class="panel-header">
-      <div class="panel-title">
-        <h3>{{ blog.title }}</h3>
+  <div class="panel panel-group" *ngFor="let blog of blogPosts">
+    <div class="panel panel-primary">
+      <div class="panel-header">
+        <div class="panel panel-heading">
+          <h3>{{ blog.title }}</h3>
+        </div>
+        <div class="panel panel-info">
+          <div class="panel-body">{{ blog.excerpt }}</div>
+        </div>
+      </div>
+      <div class="panel panel-body">{{ blog.blog }}</div>
+      <div class="panel panel-footer">
+        {{ blog.date | date: "MMM dd, yyyy" }}
       </div>
     </div>
-    <div class="panel-body">{{ blog.blog }}</div>
-    <div>{{ blog.date | date: "MMM dd, yyyy" }}</div>
   </div>
 </div>

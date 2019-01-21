@@ -23,6 +23,13 @@ export class PublicService {
       })
     );
   }
+  getPost(slug) {
+    return this.http.get<any>(this.domain + "blogsPublic/getPost/" + slug).pipe(
+      map((res: any) => {
+        return res;
+      })
+    );
+  }
   getAllBlogs() {
     return this.http.get<any>(this.domain + "blogsPublic/allBlogs").pipe(
       map((res: any) => {
