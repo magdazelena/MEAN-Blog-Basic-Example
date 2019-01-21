@@ -1,0 +1,6 @@
+<h1 class="page-header">Usunąć post?</h1>
+<div class="row show-hide-message">
+  <div [ngClass]="messageClass">{{ message }}</div>
+</div>
+<button class="btn btn-success" (click)="goBack()">Wróć</button>
+<button class="btn btn-danger" (click)="deleteBlog(id)">Usuń</button>

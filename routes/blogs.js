@@ -136,5 +136,39 @@ module.exports = router => {
       });
     }
   });
+  router.delete("/deletePost/:id", (req, res) => {
+    if (!req.params.id) {
+      res.json({ success: false, message: "Nie podano id" });
+    } else {
+      Blog.findOne({ _id: req.params.id }, (err, blog) => {
+        if (err || !blog) {
+          res.json({ success: false, message: "Nie znaleziono id" });
+        } else {
+          User.findOne({ _id: req.decoded.userId }, (err, user) => {
+            if (err || !user) {
+              res.json({
+                success: false,
+                message: "Nie znaleziono id"
+              });
+            } else {
+              blog.remove(err => {
+                if (err) {
+                  res.json({
+                    success: false,
+                    message: "Nie udało sie usunąć"
+                  });
+                } else {
+                  res.json({
+                    success: true,
+                    message: "Usunięto post"
+                  });
+                }
+              });
+            }
+          });
+        }
+      });
+    }
+  });
   return router;
 };

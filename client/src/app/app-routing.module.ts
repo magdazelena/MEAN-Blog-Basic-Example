@@ -10,6 +10,7 @@ import { NotAuthGuard } from "./guards/notAuth.guard";
 import { BlogComponent } from "./components/blog/blog.component";
 import { PostComponent } from "./components/post/post.component";
 import { EditBlogComponent } from "./components/blog/edit-blog/edit-blog.component";
+import { DeleteBlogComponent } from "./components/blog/delete-blog/delete-blog.component";
 const routes: Routes = [
   { path: "", component: HomeComponent },
   { path: "post/:slug", component: PostComponent },
@@ -26,6 +27,11 @@ const routes: Routes = [
   {
     path: "edit-blog/:id",
     component: EditBlogComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: "delete-blog/:id",
+    component: DeleteBlogComponent,
     canActivate: [AuthGuard]
   },
   {

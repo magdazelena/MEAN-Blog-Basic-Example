@@ -53,6 +53,16 @@ export class BlogService {
         })
       );
   }
+  deletePost(id) {
+    this.createAuthenticationHeaders();
+    return this.http
+      .delete<any>(this.domain + "blogs/deletePost/" + id, this.options)
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
   getPost(id) {
     this.createAuthenticationHeaders();
     return this.http

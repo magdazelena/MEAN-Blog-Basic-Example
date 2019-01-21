@@ -77,6 +77,7 @@ export class BlogComponent implements OnInit {
   newBlogForm() {
     this.newPost = true;
   }
+
   getAllBlogs() {
     this.blogService.getAllBlogs().subscribe(data => {
       this.blogPosts = data.blogs;
